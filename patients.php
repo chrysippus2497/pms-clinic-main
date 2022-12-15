@@ -97,8 +97,7 @@ if (isset($_POST['save_Patient'])) {
 
 try {
 
-    $query = "SELECT `id`, `patient_name`, `address`, 
-`course`, date_format(`date_of_birth`, '%d %b %Y') as `date_of_birth`, 
+    $query = "SELECT  patients.*, date_format(`date_of_birth`, '%d %b %Y') as `date_of_birth`, 
 `phone_number`, `gender`, `complaint`
 FROM `patients` order by `patient_name` asc;";
 
@@ -198,12 +197,7 @@ FROM `patients` order by `patient_name` asc;";
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10">
                                 <div class="form-group">
                                     <label>Today's Time</label>
-                                    <div class="input-group date"
-                                         id="todays_time"
-                                         data-target-input="nearest">
-                                        <input type="time" class="form-control form-control-sm rounded-0 datetimepicker-input" data-target="#todays_time" name="todays_time"
-                                               data-toggle="datetimepicker" autocomplete="off" />
-                                    </div>
+                                    <input type="time" class="form-control form-control-sm rounded-0" data-target="#todays_time" name="todays_time" autocomplete="off" />
                                 </div>
                             </div>
 
@@ -295,7 +289,7 @@ FROM `patients` order by `patient_name` asc;";
                                     <td><?php echo $row['patient_name'];?></td>
                                     <td><?php echo $row['address'];?></td>
                                     <td><?php echo $row['course'];?></td>
-                                    <td><?php echo $row['date_of_birth'];?></td>
+                                    <td><?php echo $row['date_of_birth'] .' '. date('h:i a',strtotime($row['todays_time']));?></td>
                                     <td><?php echo $row['phone_number'];?></td>
                                     <td><?php echo $row['gender'];?></td>
                                     <td><?php echo $row['course'];?></td>
